@@ -68,16 +68,28 @@ func (t *SofaVolleyBall) VolleyBallMatch(value []byte, dataType jsonparser.Value
 		Logging(err, "statusType")
 		return
 	}
+	id, err := jsonparser.GetInt(value, "id")
+	if err != nil {
+		Logging(err, "id")
+		return
+	}
+	changeDate, _, _, err := jsonparser.Get(value, "changes", "changeDate")
+	if err != nil {
+		//Logging(err, "changeDate")
+		//return
+	}
 	/*fmt.Println(string(statusType))
 	fmt.Println(string(homeTeam))
 	fmt.Println(string(homeScore))
 	fmt.Println(string(awayTeam))
 	fmt.Println(string(awayScore))
 	fmt.Println()*/
-	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType)}
+	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate)}
 	t.printMatch(volT)
 }
 func (t *SofaVolleyBall) printMatch(m VolleyBall) {
+	fmt.Printf("Id game: %d\n", m.id)
+	fmt.Printf("Date Change: %s\n", m.changeDate)
 	fmt.Printf("Status game: %s\n", m.statusType)
 	fmt.Printf("Home Team: %s\n", m.homeTeam)
 	err := jsonparser.ObjectEach(m.homeScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {

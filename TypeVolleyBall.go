@@ -6,4 +6,6 @@ type VolleyBall struct {
 	awayTeam   string
 	awayScore  []byte
 	statusType string
+	id         int64
+	changeDate string
 }
