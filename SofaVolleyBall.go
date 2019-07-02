@@ -20,23 +20,23 @@ func (t *SofaVolleyBall) workWithResponse(s string) {
 	defer SaveStack()
 	_, err := jsonparser.ArrayEach([]byte(s), func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		if err != nil {
-			Logging(err)
+			Logging(err, "callback workWithResponse")
 			return
 		}
 		scoring, _, _, err := jsonparser.Get(value, "events")
 		//fmt.Println(string(scoring))
 		if err != nil {
-			Logging(err)
+			Logging(err, "scoring")
 			return
 		}
 		_, err = jsonparser.ArrayEach([]byte(scoring), t.VolleyBallMatch)
 		if err != nil {
-			Logging(err)
+			Logging(err, "VolleyBallMatch")
 			return
 		}
 	}, "sportItem", "tournaments")
 	if err != nil {
-		Logging(err)
+		Logging(err, "sportItem tournaments")
 		return
 	}
 
@@ -45,12 +45,12 @@ func (t *SofaVolleyBall) workWithResponse(s string) {
 func (t *SofaVolleyBall) VolleyBallMatch(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 	homeTeam, _, _, err := jsonparser.Get(value, "homeTeam", "name")
 	if err != nil {
-		Logging(err)
+		Logging(err, "homeTeam")
 		return
 	}
 	homeScore, _, _, err := jsonparser.Get(value, "homeScore")
 	if err != nil {
-		Logging(err)
+		Logging(err, "homeScore")
 		return
 	}
 	awayTeam, _, _, err := jsonparser.Get(value, "awayTeam", "name")
@@ -60,9 +60,15 @@ func (t *SofaVolleyBall) VolleyBallMatch(value []byte, dataType jsonparser.Value
 	}
 	awayScore, _, _, err := jsonparser.Get(value, "awayScore")
 	if err != nil {
-		Logging(err)
+		Logging(err, "awayScore")
 		return
 	}
+	statusType, _, _, err := jsonparser.Get(value, "status", "type")
+	if err != nil {
+		Logging(err, "statusType")
+		return
+	}
+	fmt.Println(string(statusType))
 	fmt.Println(string(homeTeam))
 	fmt.Println(string(homeScore))
 	fmt.Println(string(awayTeam))
