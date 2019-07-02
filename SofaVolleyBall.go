@@ -11,7 +11,7 @@ type SofaVolleyBall struct {
 
 func (t *SofaVolleyBall) run() {
 	curDate := time.Now().Format("2006-01-02")
-	UrlSofa := fmt.Sprintf("https://www.sofascore.com/volleyball//%s/json?_=156197938", curDate)
+	UrlSofa := fmt.Sprintf("https://www.sofascore.com/volleyball//%s/json?_=%d", curDate, random(1000000000, 9999999999))
 	response := DownloadPage(UrlSofa)
 	t.workWithResponse(response)
 }
