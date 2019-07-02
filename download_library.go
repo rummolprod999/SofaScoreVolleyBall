@@ -98,7 +98,9 @@ func GetPageUA(url string) string {
 	}
 	request.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)")
 	resp, err := client.Do(request)
-	defer resp.Body.Close()
+	if resp != nil && resp.Body != nil {
+		defer resp.Body.Close()
+	}
 	if err != nil {
 		Logging("Ошибка скачивания", url, err)
 		return st
