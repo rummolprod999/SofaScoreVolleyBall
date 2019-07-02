@@ -68,10 +68,34 @@ func (t *SofaVolleyBall) VolleyBallMatch(value []byte, dataType jsonparser.Value
 		Logging(err, "statusType")
 		return
 	}
-	fmt.Println(string(statusType))
+	/*fmt.Println(string(statusType))
 	fmt.Println(string(homeTeam))
 	fmt.Println(string(homeScore))
 	fmt.Println(string(awayTeam))
 	fmt.Println(string(awayScore))
-	fmt.Println()
+	fmt.Println()*/
+	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType)}
+	t.printMatch(volT)
+}
+func (t *SofaVolleyBall) printMatch(m VolleyBall) {
+	fmt.Printf("Status game: %s\n", m.statusType)
+	fmt.Printf("Home Team: %s\n", m.homeTeam)
+	err := jsonparser.ObjectEach(m.homeScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
+		fmt.Printf("%s: %s\n", string(key), string(value))
+		return nil
+	})
+	if err != nil {
+		Logging(err, "printMatch", fmt.Sprintf("%s", string(m.homeScore)))
+		return
+	}
+	fmt.Printf("Away Team: %s\n", m.awayTeam)
+	err = jsonparser.ObjectEach(m.awayScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
+		fmt.Printf("%s: %s\n", string(key), string(value))
+		return nil
+	})
+	if err != nil {
+		Logging(err, "printMatch", fmt.Sprintf("%s", string(m.awayScore)))
+		return
+	}
+	fmt.Printf("\n\n\n")
 }
