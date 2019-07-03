@@ -88,7 +88,13 @@ func DownloadFile(filepath string, url string) error {
 	}
 }
 
-func GetPageUA(url string) string {
+func GetPageUA(url string) (ret string) {
+	defer func() {
+		if r := recover(); r != nil {
+			Logging(fmt.Sprintf("was panic, recovered value: %v", r))
+			ret = ""
+		}
+	}()
 	var st string
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", url, nil)
