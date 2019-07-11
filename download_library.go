@@ -40,10 +40,6 @@ func GetPage(url string) string {
 		return st
 	}
 	defer resp.Body.Close()
-	if err != nil {
-		Logging("Ошибка скачивания", url, err)
-		return st
-	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		Logging("Ошибка чтения", url, err)
