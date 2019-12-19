@@ -2,40 +2,52 @@ package main
 
 import (
 	"fmt"
-	"src/github.com/buger/jsonparser"
+	"strings"
 )
 
 type VolleyBall struct {
-	homeTeam   string
-	homeScore  []byte
-	awayTeam   string
-	awayScore  []byte
-	statusType string
-	id         int64
-	changeDate string
+	homeTeam     string
+	homeScore    []byte
+	homeScoreMap map[string]int
+	awayTeam     string
+	awayScore    []byte
+	awayScoreMap map[string]int
+	statusType   string
+	id           int64
+	changeDate   string
 }
 
 func (m *VolleyBall) printMatch() {
+	if m.statusType == "notstarted" || m.statusType == "finished" || m.statusType == "canceled" {
+		return
+	}
 	fmt.Printf("Id game: %d\n", m.id)
 	fmt.Printf("Date Change: %s\n", m.changeDate)
 	fmt.Printf("Status game: %s\n", m.statusType)
 	fmt.Printf("Home Team: %s\n", m.homeTeam)
-	err := jsonparser.ObjectEach(m.homeScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
-		fmt.Printf("%s: %s\n", string(key), string(value))
-		return nil
-	})
-	if err != nil {
-		Logging(err, "printMatch", fmt.Sprintf("%s", string(m.homeScore)))
-		return
+	for k, v := range m.homeScoreMap {
+		fmt.Printf("%s: %d\n", k, v)
 	}
 	fmt.Printf("Away Team: %s\n", m.awayTeam)
-	err = jsonparser.ObjectEach(m.awayScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
-		fmt.Printf("%s: %s\n", string(key), string(value))
-		return nil
-	})
-	if err != nil {
-		Logging(err, "printMatch", fmt.Sprintf("%s", string(m.awayScore)))
-		return
+	for k, v := range m.awayScoreMap {
+		fmt.Printf("%s: %d\n", k, v)
 	}
 	fmt.Printf("\n\n\n")
+	//SendToTelegram(m)
+}
+
+func (m *VolleyBall) sendMatch() {
+	if m.statusType == "notstarted" || m.statusType == "finished" || m.statusType == "canceled" {
+		return
+	}
+	for k, v := range m.awayScoreMap {
+		if !strings.Contains(k, "period") {
+			continue
+		}
+		if per, ok := m.homeScoreMap[k]; ok {
+			if per == v {
+				SendToTelegram(m)
+			}
+		}
+	}
 }

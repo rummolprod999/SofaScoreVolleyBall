@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"src/github.com/buger/jsonparser"
+	"github.com/buger/jsonparser"
+	"strconv"
 	"time"
 )
 
@@ -82,12 +83,26 @@ func (t *SofaVolleyBall) VolleyBallMatch(value []byte, dataType jsonparser.Value
 		//Logging(err, "changeDate")
 		//return
 	}
-	/*fmt.Println(string(statusType))
-	fmt.Println(string(homeTeam))
-	fmt.Println(string(homeScore))
-	fmt.Println(string(awayTeam))
-	fmt.Println(string(awayScore))
-	fmt.Println()*/
-	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate)}
+	homeScoreMap := make(map[string]int)
+	err = jsonparser.ObjectEach(homeScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
+		valInt, _ := strconv.ParseInt(string(value), 10, 32)
+		homeScoreMap[string(key)] = int(valInt)
+		return nil
+	})
+	if err != nil {
+		Logging(err, "homeScore map", fmt.Sprintf("%s", string(homeScore)))
+		return
+	}
+	awayScoreMap := make(map[string]int)
+	err = jsonparser.ObjectEach(awayScore, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
+		valInt, _ := strconv.ParseInt(string(value), 10, 32)
+		awayScoreMap[string(key)] = int(valInt)
+		return nil
+	})
+	if err != nil {
+		Logging(err, "awayScore map", fmt.Sprintf("%s", string(awayScore)))
+		return
+	}
+	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate), homeScoreMap: homeScoreMap, awayScoreMap: awayScoreMap}
 	volT.printMatch()
 }
