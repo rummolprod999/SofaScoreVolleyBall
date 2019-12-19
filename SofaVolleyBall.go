@@ -104,5 +104,6 @@ func (t *SofaVolleyBall) VolleyBallMatch(value []byte, dataType jsonparser.Value
 		return
 	}
 	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate), homeScoreMap: homeScoreMap, awayScoreMap: awayScoreMap}
-	volT.printMatch()
+	//volT.printMatch()
+	volT.sendMatch()
 }

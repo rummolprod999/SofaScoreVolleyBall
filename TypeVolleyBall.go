@@ -45,7 +45,7 @@ func (m *VolleyBall) sendMatch() {
 			continue
 		}
 		if per, ok := m.homeScoreMap[k]; ok {
-			if per == v {
+			if per == 21 && v == 21 {
 				SendToTelegram(m)
 			}
 		}
