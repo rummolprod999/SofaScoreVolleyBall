@@ -76,7 +76,6 @@ func DownloadFile(filepath string, url string) error {
 			count++
 			Logging(err)
 			time.Sleep(time.Second * 5)
-			CreateTempDir()
 			continue
 		}
 		return nil
