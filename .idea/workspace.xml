@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3dc4b26b-6c25-455e-bd95-c997fd62ee7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SendToTg.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enviroment.go" beforeDir="false" afterPath="$PROJECT_DIR$/enviroment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SendToTg.go" beforeDir="false" afterPath="$PROJECT_DIR$/SendToTg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SofaVolleyBall.go" beforeDir="false" afterPath="$PROJECT_DIR$/SofaVolleyBall.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TypeVolleyBall.go" beforeDir="false" afterPath="$PROJECT_DIR$/TypeVolleyBall.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,67 +87,61 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="fix issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix issue" />
+    <MESSAGE value="add config" />
+    <option name="LAST_COMMIT_MESSAGE" value="add config" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1904" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576822853199">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
     <state x="1904" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576822853199" />
-    <state x="2067" y="102" width="746" height="842" key="CommitChangelistDialog2" timestamp="1576759669816">
+    <state x="2067" y="102" width="746" height="842" key="CommitChangelistDialog2" timestamp="1576823321043">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state x="2067" y="102" width="746" height="842" key="CommitChangelistDialog2/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576759669816" />
+    <state x="2067" y="102" width="746" height="842" key="CommitChangelistDialog2/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576823321043" />
     <state x="2227" y="282" key="FileChooserDialogImpl" timestamp="1576822827965">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
     <state x="2227" y="282" key="FileChooserDialogImpl/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576822827965" />
-    <state width="819" height="322" key="GridCell.Tab.0.bottom" timestamp="1576763356899">
+    <state width="816" height="258" key="GridCell.Tab.0.bottom" timestamp="1576825024314">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.0.bottom/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356899" />
-    <state width="819" height="322" key="GridCell.Tab.0.center" timestamp="1576763356858">
+    <state width="816" height="258" key="GridCell.Tab.0.bottom/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576825024314" />
+    <state width="816" height="258" key="GridCell.Tab.0.center" timestamp="1576825024310">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.0.center/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356858" />
-    <state width="819" height="322" key="GridCell.Tab.0.left" timestamp="1576763356852">
+    <state width="816" height="258" key="GridCell.Tab.0.center/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576825024310" />
+    <state width="816" height="258" key="GridCell.Tab.0.left" timestamp="1576825024310">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.0.left/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356852" />
-    <state width="819" height="322" key="GridCell.Tab.0.right" timestamp="1576763356899">
+    <state width="816" height="258" key="GridCell.Tab.0.left/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576825024310" />
+    <state width="816" height="258" key="GridCell.Tab.0.right" timestamp="1576825024310">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.0.right/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356899" />
-    <state width="819" height="322" key="GridCell.Tab.1.bottom" timestamp="1576763356910">
+    <state width="816" height="258" key="GridCell.Tab.0.right/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576825024310" />
+    <state width="819" height="322" key="GridCell.Tab.1.bottom" timestamp="1576824975278">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.1.bottom/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356910" />
-    <state width="819" height="322" key="GridCell.Tab.1.center" timestamp="1576763356899">
+    <state width="819" height="322" key="GridCell.Tab.1.bottom/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576824975278" />
+    <state width="819" height="322" key="GridCell.Tab.1.center" timestamp="1576824975278">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.1.center/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356899" />
-    <state width="819" height="322" key="GridCell.Tab.1.left" timestamp="1576763356899">
+    <state width="819" height="322" key="GridCell.Tab.1.center/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576824975278" />
+    <state width="819" height="322" key="GridCell.Tab.1.left" timestamp="1576824975278">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.1.left/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356899" />
-    <state width="819" height="322" key="GridCell.Tab.1.right" timestamp="1576763356899">
+    <state width="819" height="322" key="GridCell.Tab.1.left/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576824975278" />
+    <state width="819" height="322" key="GridCell.Tab.1.right" timestamp="1576824975278">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state width="819" height="322" key="GridCell.Tab.1.right/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576763356899" />
-    <state x="2040" y="256" key="Vcs.Push.Dialog.v2" timestamp="1576759672800">
+    <state width="819" height="322" key="GridCell.Tab.1.right/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576824975278" />
+    <state x="2040" y="256" key="Vcs.Push.Dialog.v2" timestamp="1576823326163">
       <screen x="1600" y="0" width="1680" height="1050" />
     </state>
-    <state x="2040" y="256" key="Vcs.Push.Dialog.v2/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576759672800" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/main.go</url>
-          <line>10</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="2040" y="256" key="Vcs.Push.Dialog.v2/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576823326163" />
+    <state width="840" height="527" key="XDebugger.FullValuePopup" timestamp="1576823437784">
+      <screen x="1600" y="0" width="1680" height="1050" />
+    </state>
+    <state width="840" height="527" key="XDebugger.FullValuePopup/0.24.1600.876/1600.0.1680.1050@1600.0.1680.1050" timestamp="1576823437784" />
   </component>
 </project>

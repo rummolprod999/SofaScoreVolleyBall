@@ -8,6 +8,7 @@ import (
 )
 
 type SofaVolleyBall struct {
+	seasonName string
 }
 
 func (t *SofaVolleyBall) run() {
@@ -34,6 +35,12 @@ func (t *SofaVolleyBall) workWithResponse(s string) {
 			Logging(err, "scoring")
 			return
 		}
+		seasonNameByte, _, _, err := jsonparser.Get(value, "season", "name")
+		if err != nil {
+			Logging(err, "seasonNameByte")
+			return
+		}
+		t.seasonName = string(seasonNameByte)
 		_, err = jsonparser.ArrayEach([]byte(scoring), t.VolleyBallMatch)
 		if err != nil {
 			Logging(err, "VolleyBallMatch")
@@ -103,7 +110,7 @@ func (t *SofaVolleyBall) VolleyBallMatch(value []byte, dataType jsonparser.Value
 		Logging(err, "awayScore map", fmt.Sprintf("%s", string(awayScore)))
 		return
 	}
-	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate), homeScoreMap: homeScoreMap, awayScoreMap: awayScoreMap}
+	volT := VolleyBall{homeTeam: string(homeTeam), homeScore: homeScore, awayTeam: string(awayTeam), awayScore: awayScore, statusType: string(statusType), id: id, changeDate: string(changeDate), homeScoreMap: homeScoreMap, awayScoreMap: awayScoreMap, seasonName: t.seasonName}
 	//volT.printMatch()
 	volT.sendMatch()
 }

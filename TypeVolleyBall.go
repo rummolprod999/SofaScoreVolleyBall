@@ -15,6 +15,7 @@ type VolleyBall struct {
 	statusType   string
 	id           int64
 	changeDate   string
+	seasonName   string
 }
 
 func (m *VolleyBall) printMatch() {

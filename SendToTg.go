@@ -19,6 +19,7 @@ func SendToTelegram(m *VolleyBall, period string) {
 	if err != nil {
 		Logging(err)
 	}
+	Logging("send message")
 }
 
 func CheckIfExist(id_game, period string) bool {
@@ -48,13 +49,13 @@ func CheckIfExist(id_game, period string) bool {
 
 func CreateMessage(m *VolleyBall, period string) string {
 	message := ""
-	message += fmt.Sprintf("<b>Id game:</b> %d\n", m.id)
+	message += fmt.Sprintf("<b>Season name:</b> %s\n", m.seasonName)
 	//message += fmt.Sprintf("<b>Date Change:</b> %s\n", m.changeDate)
-	message += fmt.Sprintf("<b>Status game:</b> %s\n", m.statusType)
+	//message += fmt.Sprintf("<b>Status game:</b> %s\n", m.statusType)
 	message += fmt.Sprintf("\n")
 	message += fmt.Sprintf("<b>Home Team:</b> %s\n", m.homeTeam)
 	message += fmt.Sprintf("<b>Away Team:</b> %s\n", m.awayTeam)
 	message += fmt.Sprintf("\n")
-	message += fmt.Sprintf("%s: 21:21\n", period)
+	message += fmt.Sprintf("<b>%s:</b> 21:21\n", period)
 	return message
 }
