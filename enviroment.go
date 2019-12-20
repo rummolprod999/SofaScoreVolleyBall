@@ -3,7 +3,9 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"github.com/buger/jsonparser"
 	_ "github.com/mattn/go-sqlite3"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"sync"
@@ -14,13 +16,45 @@ type Filelog string
 
 var DirLog = "log_server_sofa_volley"
 var FileDB = "sofa.db"
-var SofaTable = "sofa"
+var BotToken string
+var ChannelId int64
+var SetFile = "settings.json"
 var FileLog Filelog
 var mutex sync.Mutex
 
 func DbConnection() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", fmt.Sprintf("file:%s?_journal_mode=OFF&_synchronous=OFF", FileDB))
 	return db, err
+}
+
+func ReadSetting() {
+	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+	filetemp := filepath.FromSlash(fmt.Sprintf("%s/%s", dir, SetFile))
+	file, err := os.Open(filetemp)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	defer file.Close()
+	b, err := ioutil.ReadAll(file)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	BotToken, err = jsonparser.GetString(b, "bot_token")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	ChannelId, err = jsonparser.GetInt(b, "channel_id")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	if BotToken == "" || ChannelId == 0 {
+		fmt.Println("Check file with settings")
+		os.Exit(1)
+	}
 }
 
 func Logging(args ...interface{}) {
@@ -118,6 +152,7 @@ func CreateNewDB() {
 }
 
 func CreateEnv() {
+	ReadSetting()
 	CreateLogFile()
 	CreateNewDB()
 }
