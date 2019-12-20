@@ -35,12 +35,13 @@ func (t *SofaVolleyBall) workWithResponse(s string) {
 			Logging(err, "scoring")
 			return
 		}
-		seasonNameByte, _, _, err := jsonparser.Get(value, "season", "name")
+		seasonNameByte, _, _, err := jsonparser.Get(value, "tournament", "name")
 		if err != nil {
-			Logging(err, "seasonNameByte")
-			return
+			seasonNameByte, _, _, err = jsonparser.Get(value, "season", "slug")
 		}
-		t.seasonName = string(seasonNameByte)
+		if err == nil {
+			t.seasonName = string(seasonNameByte)
+		}
 		_, err = jsonparser.ArrayEach([]byte(scoring), t.VolleyBallMatch)
 		if err != nil {
 			Logging(err, "VolleyBallMatch")
