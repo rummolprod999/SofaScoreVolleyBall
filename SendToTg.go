@@ -7,7 +7,7 @@ import (
 )
 
 func SendToTelegram(m *VolleyBall, period string, score int) {
-	if !CheckIfExist(fmt.Sprintf("%d", m.id), period) {
+	if !CheckIfExist(fmt.Sprintf("%d", m.id), period, score) {
 		return
 	}
 	bot, err := tgbotapi.NewBotAPI(BotToken)
@@ -23,14 +23,14 @@ func SendToTelegram(m *VolleyBall, period string, score int) {
 	Logging("send message")
 }
 
-func CheckIfExist(id_game, period string) bool {
+func CheckIfExist(id_game, period string, score int) bool {
 	db, err := DbConnection()
 	if err != nil {
 		Logging(err)
 		return true
 	}
 	defer db.Close()
-	rows, err := db.Query("SELECT id FROM sofa WHERE id_game=$1 AND period=$2", id_game, period)
+	rows, err := db.Query("SELECT id FROM sofa WHERE id_game=$1 AND period=$2 AND score=$3", id_game, period, score)
 	if err != nil {
 		Logging(err)
 		return true
@@ -40,7 +40,7 @@ func CheckIfExist(id_game, period string) bool {
 		return false
 	}
 	rows.Close()
-	_, err = db.Exec("INSERT INTO sofa (id, id_game, period) VALUES (NULL, $1, $2)", id_game, period)
+	_, err = db.Exec("INSERT INTO sofa (id, id_game, period, score) VALUES (NULL, $1, $2, $3)", id_game, period, score)
 	if err != nil {
 		Logging(err)
 		return true

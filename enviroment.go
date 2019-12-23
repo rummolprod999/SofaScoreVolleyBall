@@ -120,6 +120,7 @@ func CreateNewDB() {
 	"id"	INTEGER NOT NULL,
 	"id_game"	TEXT,
 	"period"	TEXT,
+	"score"	INTEGER,
 	PRIMARY KEY("id" AUTOINCREMENT)
 )`)
 		if err != nil {
@@ -136,6 +137,13 @@ func CreateNewDB() {
 		}
 		_, err = db.Exec(`CREATE INDEX "period" ON "sofa" (
 	"period"
+)`)
+		if err != nil {
+			Logging(err)
+			panic(err)
+		}
+		_, err = db.Exec(`CREATE INDEX "score" ON "sofa" (
+	"score"
 )`)
 		if err != nil {
 			Logging(err)
