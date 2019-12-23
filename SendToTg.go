@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	"strconv"
 )
 
-func SendToTelegram(m *VolleyBall, period string) {
+func SendToTelegram(m *VolleyBall, period string, score int) {
 	if !CheckIfExist(fmt.Sprintf("%d", m.id), period) {
 		return
 	}
@@ -13,7 +14,7 @@ func SendToTelegram(m *VolleyBall, period string) {
 	if err != nil {
 		Logging(err)
 	}
-	msg := tgbotapi.NewMessage(ChannelId, CreateMessage(m, period))
+	msg := tgbotapi.NewMessage(ChannelId, CreateMessage(m, period, score))
 	msg.ParseMode = "html"
 	_, err = bot.Send(msg)
 	if err != nil {
@@ -47,15 +48,27 @@ func CheckIfExist(id_game, period string) bool {
 	return true
 }
 
-func CreateMessage(m *VolleyBall, period string) string {
+func CreateMessage(m *VolleyBall, period string, score int) string {
 	message := ""
-	message += fmt.Sprintf("<b>Season name:</b> %s\n", m.seasonName)
+	seasName, err := strconv.Unquote("\"" + m.seasonName + "\"")
+	if err != nil {
+		seasName = m.seasonName
+	}
+	message += fmt.Sprintf("<b>Season name:</b> %s\n", seasName)
 	//message += fmt.Sprintf("<b>Date Change:</b> %s\n", m.changeDate)
 	//message += fmt.Sprintf("<b>Status game:</b> %s\n", m.statusType)
 	message += fmt.Sprintf("\n")
-	message += fmt.Sprintf("<b>Home Team:</b> %s\n", m.homeTeam)
-	message += fmt.Sprintf("<b>Away Team:</b> %s\n", m.awayTeam)
+	homeTeam, err := strconv.Unquote("\"" + m.homeTeam + "\"")
+	if err != nil {
+		homeTeam = m.homeTeam
+	}
+	message += fmt.Sprintf("<b>Home Team:</b> %s\n", homeTeam)
+	awayTeam, err := strconv.Unquote("\"" + m.awayTeam + "\"")
+	if err != nil {
+		awayTeam = m.awayTeam
+	}
+	message += fmt.Sprintf("<b>Away Team:</b> %s\n", awayTeam)
 	message += fmt.Sprintf("\n")
-	message += fmt.Sprintf("<b>%s:</b> 21:21\n", period)
+	message += fmt.Sprintf("<b>%s:</b> %d:%d\n", period, score, score)
 	return message
 }
